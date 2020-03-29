@@ -130,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
                 Intent principal = new Intent(LoginActivity.this, PrincipalActivity.class);
                 startActivity(principal);
-                
+
             }
         });
     }
