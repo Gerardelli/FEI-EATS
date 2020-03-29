@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1053679589407",
+    "firebase_url": "https://fei-uv.firebaseio.com",
+    "project_id": "fei-uv",
+    "storage_bucket": "fei-uv.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053679589407:android:0c8232d90010082d599d2a",
+        "android_client_info": {
+          "package_name": "com.eats.fei"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053679589407-25t9mmbk4c9fclf3gd83hjun36eavt62.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eats.fei",
+            "certificate_hash": "f1f9f695623e241ed9da76a53b180897d4574e20"
+          }
+        },
+        {
+          "client_id": "1053679589407-pf2e54nbmjoema8n04s6ceevjg87h9k8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGPonNwvKi4ZjvSHulAnr0ePMNc36tIms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053679589407-pf2e54nbmjoema8n04s6ceevjg87h9k8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
