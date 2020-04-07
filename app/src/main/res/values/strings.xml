@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FEI-EATS</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Usuario</string>
+    <string name="prompt_email">Correo</string>
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">Iniciar Sesión</string>
     <string name="action_sign_in_short">Iniciar Sesión</string>
@@ -29,7 +29,7 @@
     <string name="menu_salir">Salir</string>
 
     <string name="home_second">Home Second</string>
-    <string name="text_usuario">Usuaurio</string>
+    <string name="text_usuario">Correo</string>
     <string name="text_contrasena">Contraseña</string>
     <string name="text_telefono">Teléfono</string>
 </resources>
