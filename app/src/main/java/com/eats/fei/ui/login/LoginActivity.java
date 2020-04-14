@@ -2,6 +2,7 @@ package com.eats.fei.ui.login;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -28,10 +29,17 @@ import com.eats.fei.ui.login.LoginViewModel;
 import com.eats.fei.ui.login.LoginViewModelFactory;
 import com.eats.fei.ui.principal.PrincipalActivity;
 import com.eats.fei.ui.registrar.RegistrarActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    private FirebaseAuth mAuth;
+    private String email = "";
+    private String password = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
         final TextView textViewRegistrar = findViewById(R.id.textRegistrar);
+        mAuth = FirebaseAuth.getInstance();
 
         textViewRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,11 +134,21 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-                Intent principal = new Intent(LoginActivity.this, PrincipalActivity.class);
-                startActivity(principal);
+                email = usernameEditText.getText().toString();
+                password = passwordEditText.getText().toString();
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+                            finish();
+                        }else{
+                            //
+                            Toast.makeText(LoginActivity.this, "No se pudom iniciar sesión revisa tus datos", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
 
             }
         });
@@ -145,4 +164,12 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mAuth.getCurrentUser() != null){
+            startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+            finish();
+        }
+    }
 }
