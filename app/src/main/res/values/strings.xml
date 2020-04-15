@@ -32,4 +32,10 @@
     <string name="text_usuario">Correo</string>
     <string name="text_contrasena">Contraseña</string>
     <string name="text_telefono">Teléfono</string>
+
+    <!-- Textos Home Fragment -->
+    <string name="todos">Todos</string>
+    <string name="dulces">Dulces</string>
+    <string name="comida">Comida</string>
+    <string name="frituras">Frituras</string>
 </resources>
