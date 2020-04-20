@@ -3,6 +3,9 @@
     <account id="ca652e1d-ff5e-41ad-97e8-414abe448b58" name="davidmvs">
       <server host="github.com" />
     </account>
+    <account id="f61761e9-4c25-4ac9-80ea-203b962e95f1" name="estivcap@gmail.com">
+      <server host="github.com" />
+    </account>
   </component>
   <component name="GithubSettings">
     <option name="CLONE_GIT_USING_SSH" value="true" />
