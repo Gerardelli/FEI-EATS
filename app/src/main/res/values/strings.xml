@@ -44,4 +44,5 @@
     <string name="nombre_completo">Nombre completo</string>
     <string name="todo" />
     <string name="editar_informaci_n" />
+    <string name="editar_informacion">Editar información</string>
 </resources>
