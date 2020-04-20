@@ -29,6 +29,7 @@ public class RegistrarActivity extends AppCompatActivity {
     private EditText CorreoEdt;
     private EditText ContrasenaEdt;
     private Button RegistrarBtn;
+    private EditText Nombretext;
 
     //VARIABLES PARA ALMACENAR LOS DATOS
     private String telefono = "";
@@ -50,6 +51,7 @@ public class RegistrarActivity extends AppCompatActivity {
         CorreoEdt = (EditText) findViewById(R.id.CorreoEdt);
         ContrasenaEdt =(EditText) findViewById(R.id.ContrasenaEdt);
         RegistrarBtn = (Button) findViewById(R.id.RegistrarBtn);
+        Nombretext = (EditText) findViewById(R.id.Nombre);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -61,8 +63,9 @@ public class RegistrarActivity extends AppCompatActivity {
                 telefono = TelefonoEdt.getText().toString();
                 correo = CorreoEdt.getText().toString();
                 contrasena = ContrasenaEdt.getText().toString();
+                nombre = Nombretext.getText().toString();
 
-                if(!telefono.isEmpty() && !correo.isEmpty() && !contrasena.isEmpty()){
+                if(!telefono.isEmpty() && !correo.isEmpty() && !contrasena.isEmpty() && !nombre.isEmpty()){
                     if(contrasena.length()>=6 && telefono.length()==10){
                         registrarUsuario();
                     }else{

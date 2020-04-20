@@ -38,4 +38,10 @@
     <string name="dulces">Dulces</string>
     <string name="comida">Comida</string>
     <string name="frituras">Frituras</string>
+    <string name="contrase_a">Contraseña: ******</string>
+    <string name="cargando_datos">Cargando datos...</string>
+    <string name="crear_cuenta">CREAR CUENTA</string>
+    <string name="nombre_completo">Nombre completo</string>
+    <string name="todo" />
+    <string name="editar_informaci_n" />
 </resources>
