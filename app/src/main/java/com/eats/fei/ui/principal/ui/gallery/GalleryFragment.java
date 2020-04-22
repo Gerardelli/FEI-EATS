@@ -27,10 +27,7 @@ public class GalleryFragment extends Fragment {
 
     private FirebaseDatabase dDatabase;
     private FirebaseAuth firebaseAuth = null;
-
     private GalleryViewModel galleryViewModel;
-
-
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel = ViewModelProviders.of(this).get(GalleryViewModel.class);
@@ -39,8 +36,7 @@ public class GalleryFragment extends Fragment {
         final TextView nombre = root.findViewById (R.id.textView3);
         final TextView telefono = root.findViewById (R.id.textView14);
         final TextView correo = root.findViewById (R.id.textView13);
-       final Button button2 =  root.findViewById(R.id.button2);
-
+        final Button button2 =  root.findViewById(R.id.button2);
 
        /*Apartado para boton*/
         button2.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +44,6 @@ public class GalleryFragment extends Fragment {
             public void onClick(View v) {
               startActivity(new Intent(GalleryFragment.this.getContext(), EditarActivity.class));
             }
-
         });
         /*Fin del apartado*/
 
@@ -68,28 +63,12 @@ public class GalleryFragment extends Fragment {
                     nombre.setText("Nombre: " + nombre1);
                     telefono.setText("Teléfono: " + telefono1);
                     correo.setText("Correo: " + correo1);
-
-
                 }
-
-
-
-
-
             }
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
-
-
         });
-
         return root;
-
-
     }
-
 }

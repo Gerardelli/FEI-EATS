@@ -66,13 +66,9 @@ public class EditarActivity extends AppCompatActivity {
         ContrasenaE.setEnabled(false);
         CorreoE.setEnabled(false);
 
-        /*mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-*/
         dDatabase = FirebaseDatabase.getInstance().getReference(); //Aqui obtienes la referencia de la base de datos
         FirebaseUser user = firebaseAuth.getInstance ().getCurrentUser();
 
-        /**/
         //Referencia al nodo              aqui la referencia al usuario
         dDatabase.child("Usuarios").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -95,9 +91,6 @@ public class EditarActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
-        /**/
-
 
         btnCambios.setOnClickListener(new View.OnClickListener() {
             @Override
