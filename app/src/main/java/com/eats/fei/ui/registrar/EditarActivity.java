@@ -110,7 +110,7 @@ public class EditarActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getInstance ().getCurrentUser();
 
                 dDatabase.child("Usuarios").child(user.getUid()).updateChildren(map);
-                //Regresa a la pantalla de perfil
+                //Regresa a la pantalla de inicio
                 startActivity( new Intent(EditarActivity.this, PrincipalActivity.class));
                 //Muestra un Toast al usuario de que los datos fuern actualizados correctamente
                 Toast toast1 = Toast.makeText(getApplicationContext(), "Datos actualizados", Toast.LENGTH_SHORT);
