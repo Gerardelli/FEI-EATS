@@ -45,4 +45,11 @@
     <string name="todo" />
     <string name="editar_informaci_n" />
     <string name="editar_informacion">Editar información</string>
+
+    <!--Spinner para elección de categoría en dulces-->
+    <string-array name="categoria">
+        <item>Dulces</item>
+        <item>Comida</item>
+        <item>Frituras</item>
+    </string-array>
 </resources>
