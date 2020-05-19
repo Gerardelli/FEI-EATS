@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.principal.ui.slideshow.RegistrarProductoActivity"></activity>
         <activity
             android:name=".ui.principal.PrincipalActivity"
             android:label="@string/title_activity_principal"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.registrar.RegistrarActivity" />
         <activity android:name=".ui.registrar.EditarActivity" />
         <activity

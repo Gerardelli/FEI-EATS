@@ -6,61 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".ui.principal.ui.home.HomeFragment">
 
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="91dp"
-        android:layout_height="35dp"
-        android:background="@drawable/btn_azul"
-        android:text="@string/frituras"
-        android:textColor="@color/colorTextIcons"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayoutR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.028" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="81dp"
-        android:layout_height="35dp"
-        android:background="@drawable/btn_azul"
-        android:text="@string/comida"
-        android:textColor="@color/colorTextIcons"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.627"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.028" />
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/todos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Todos" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="71dp"
-        android:layout_height="35dp"
-        android:background="@drawable/btn_azul"
-        android:text="@string/todos"
-        android:textColor="@color/colorTextIcons"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.028" />
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/dulces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dulces" />
 
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:background="@drawable/btn_azul"
-        android:text="@string/dulces"
-        android:textColor="@color/colorTextIcons"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.32"
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/comida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comida" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/fritura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fritura" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="409dp"
+        android:layout_height="625dp"
+        android:layout_marginTop="1dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027" />
+        app:layout_constraintTop_toBottomOf="@+id/tablayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
