@@ -45,10 +45,5 @@
     <string name="todo" />
     <string name="editar_informaci_n" />
     <string name="editar_informacion">Editar información</string>
-
-    <string-array name="categoria">
-        <item>Dulces</item>
-        <item>Comida</item>
-        <item>Frituras</item>
-    </string-array>
+    <string name="editar_foto">Editar foto</string>
 </resources>
