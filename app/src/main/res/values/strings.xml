@@ -45,6 +45,7 @@
     <string name="todo" />
     <string name="editar_informaci_n" />
     <string name="editar_informacion">Editar información</string>
+    <string name="elegir_de_galer_a">Elegir de Galería</string>
 
     <string-array name="categoria">
         <item>Dulces</item>
@@ -54,4 +55,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="eliminar_foto">Eliminar foto</string>
+    <string name="regresar_a_inicio">Regresar a inicio</string>
+    <string name="registrar_productos">Registrar productos</string>
+    <string name="nombre_del_producto">Nombre del producto</string>
+    <string name="precio_del_producto">Precio del producto</string>
+    <string name="descripci_n_del_producto">Descripción del producto</string>
+    <string name="registar_producto">Registrar producto</string>
+    <string name="categor_a">Categoría</string>
+    <string name="editar_foto">Editar foto</string>
+
 </resources>

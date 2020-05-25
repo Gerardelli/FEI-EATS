@@ -37,12 +37,20 @@ public class GalleryFragment extends Fragment {
         final TextView telefono = root.findViewById (R.id.textView14);
         final TextView correo = root.findViewById (R.id.textView13);
         final Button button2 =  root.findViewById(R.id.button2);
+        final Button button3 =  root.findViewById(R.id.button3);
 
        /*Apartado para boton*/
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               startActivity(new Intent(GalleryFragment.this.getContext(), EditarActivity.class));
+            }
+        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GalleryFragment.this.getContext(), EditarFoto.class));
             }
         });
         /*Fin del apartado*/
