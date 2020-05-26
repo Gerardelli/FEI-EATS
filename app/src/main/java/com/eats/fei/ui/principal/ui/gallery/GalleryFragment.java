@@ -80,8 +80,12 @@ public class GalleryFragment extends Fragment {
                     nombre.setText("Nombre: " + nombre1);
                     telefono.setText("Teléfono: " + telefono1);
                     correo.setText("Correo: " + correo1);
-                    Glide.with (getActivity ()) // .load(descargarfoto).fitCenter().centerCrop().into(logoempresa);
+                    //Uso librería Glide para poder mostrar la foto
+                    Glide.with (getActivity ())
                             .load (photoUrl)
+                            .fitCenter()
+                            .centerCrop()
+                            //Asigna el valor de lo que tiene la URL al imageView correspondiente
                             .into (image4);
                 }
             }
