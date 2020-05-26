@@ -31,7 +31,7 @@ public class PagerController extends FragmentPagerAdapter {
             case 3:
                 return new Frituras();
             default:
-                return null;
+                return new Todos();
         }
     }
 
