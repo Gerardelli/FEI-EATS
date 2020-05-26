@@ -18,6 +18,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.target.Target;
 import com.eats.fei.R;
 import com.eats.fei.ui.principal.PrincipalActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +33,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 
+
 public class EditarFoto extends AppCompatActivity {
 
     private final int GALLERY_INTENT = 1;
@@ -38,7 +41,7 @@ public class EditarFoto extends AppCompatActivity {
     private Button btn20;
     private StorageReference dStorage;
     private ProgressDialog dProgressDialog;
-    private ImageView imageView20;
+    private Task<Uri> descargarfoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class EditarFoto extends AppCompatActivity {
         dStorage = FirebaseStorage .getInstance().getReference();
         btn20 =(Button) findViewById (R.id.button20);
         dProgressDialog = new ProgressDialog (this);
+        foto = (ImageView) findViewById (R.id.imageView20);
 
         //permiso para tener acceso a la cámara
         if (ContextCompat.checkSelfPermission(EditarFoto.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(EditarFoto.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -89,8 +93,11 @@ public class EditarFoto extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         dProgressDialog.dismiss ();
+                        descargarfoto = taskSnapshot.getMetadata().getReference().getDownloadUrl();
 
-
+                        Glide.with (EditarFoto.this) // .load(descargarfoto).fitCenter().centerCrop().into(logoempresa);
+                                .load (descargarfoto)
+                                .into (foto);
                         Toast.makeText (EditarFoto.this, "Foto Subida", Toast.LENGTH_SHORT).show ( );
                     }
                 });

@@ -1,17 +1,20 @@
 package com.eats.fei.ui.principal.ui.gallery;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.bumptech.glide.Glide;
 import com.eats.fei.R;
 import com.eats.fei.ui.registrar.EditarActivity;
 import com.eats.fei.ui.registrar.RegistrarActivity;
@@ -38,6 +41,7 @@ public class GalleryFragment extends Fragment {
         final TextView correo = root.findViewById (R.id.textView13);
         final Button button2 =  root.findViewById(R.id.button2);
         final Button button3 =  root.findViewById(R.id.button3);
+        final ImageView image4 = root.findViewById (R.id.imageView4);
 
        /*Apartado para boton*/
         button2.setOnClickListener(new View.OnClickListener() {
@@ -66,11 +70,19 @@ public class GalleryFragment extends Fragment {
                     String nombre1 = dataSnapshot.child("Nombre").getValue().toString();
                     String telefono1 = dataSnapshot.child("Telefono").getValue().toString();
                     String correo1 = dataSnapshot.child("Correo").getValue().toString();
+                    Uri photoUrl = Uri.parse (dataSnapshot.child ("fotoPerfilURL").getValue().toString ());
+
+
+
+
 
                     //Asigna el valor de la variable al TextView correspondiente
                     nombre.setText("Nombre: " + nombre1);
                     telefono.setText("Teléfono: " + telefono1);
                     correo.setText("Correo: " + correo1);
+                    Glide.with (getActivity ()) // .load(descargarfoto).fitCenter().centerCrop().into(logoempresa);
+                            .load (photoUrl)
+                            .into (image4);
                 }
             }
             @Override
