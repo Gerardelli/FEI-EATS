@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.eats.fei.R;
 import com.eats.fei.ui.principal.PrincipalActivity;
+import com.eats.fei.ui.principal.ui.gallery.GalleryFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -65,13 +66,9 @@ public class EditarActivity extends AppCompatActivity {
         ContrasenaE.setEnabled(false);
         CorreoE.setEnabled(false);
 
-        /*mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-*/
         dDatabase = FirebaseDatabase.getInstance().getReference(); //Aqui obtienes la referencia de la base de datos
         FirebaseUser user = firebaseAuth.getInstance ().getCurrentUser();
 
-        /**/
         //Referencia al nodo              aqui la referencia al usuario
         dDatabase.child("Usuarios").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -95,9 +92,6 @@ public class EditarActivity extends AppCompatActivity {
             }
         });
 
-        /**/
-
-
         btnCambios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +110,13 @@ public class EditarActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getInstance ().getCurrentUser();
 
                 dDatabase.child("Usuarios").child(user.getUid()).updateChildren(map);
+                //Regresa a la pantalla de inicio
+                startActivity( new Intent(EditarActivity.this, PrincipalActivity.class));
+                //Muestra un Toast al usuario de que los datos fuern actualizados correctamente
+                Toast toast1 = Toast.makeText(getApplicationContext(), "Datos actualizados", Toast.LENGTH_SHORT);
+                toast1.show();
+                finish();
+
 
             }
         });
