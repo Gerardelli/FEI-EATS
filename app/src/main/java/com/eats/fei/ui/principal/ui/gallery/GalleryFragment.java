@@ -1,14 +1,18 @@
 package com.eats.fei.ui.principal.ui.gallery;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,8 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class GalleryFragment extends Fragment {
-
+public class GalleryFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
+    private final int GALLERY_INTENT = 1;
     private FirebaseDatabase dDatabase;
     private FirebaseAuth firebaseAuth = null;
     private GalleryViewModel galleryViewModel;
@@ -57,6 +61,17 @@ public class GalleryFragment extends Fragment {
                 startActivity(new Intent(GalleryFragment.this.getContext(), EditarFoto.class));
             }
         });
+
+        /*button3.setOnClickListener(new View.OnClickListener() {
+            //private Object onMenuItemClickListener;
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), v);
+                //popup.setOnMenuItemClickListener();
+                popup.inflate(R.menu.popup_menu);
+                popup.show();
+            }
+        });*/
         /*Fin del apartado*/
 
         dDatabase = FirebaseDatabase.getInstance();
@@ -71,10 +86,6 @@ public class GalleryFragment extends Fragment {
                     String telefono1 = dataSnapshot.child("Telefono").getValue().toString();
                     String correo1 = dataSnapshot.child("Correo").getValue().toString();
                     Uri photoUrl = Uri.parse (dataSnapshot.child ("fotoPerfilURL").getValue().toString ());
-
-
-
-
 
                     //Asigna el valor de la variable al TextView correspondiente
                     nombre.setText("Nombre: " + nombre1);
@@ -95,4 +106,22 @@ public class GalleryFragment extends Fragment {
         });
         return root;
     }
+
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item1:
+                Intent intent = new Intent (Intent.ACTION_PICK);
+                intent.setType ("image/*");
+                startActivityForResult (intent,GALLERY_INTENT);
+                return true;
+            case R.id.item2:
+                Toast.makeText(getActivity (), "Item 2 clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item3:
+                Toast.makeText(getActivity (), "Item 3 clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            default: return false;
+        }
+    }
+
 }
