@@ -61,7 +61,7 @@ public class GalleryFragment extends Fragment implements PopupMenu.OnMenuItemCli
                 startActivity(new Intent(GalleryFragment.this.getContext(), EditarFoto.class));
             }
         });
-
+//Boton para sacar menú popup en posible versión futura
         /*button3.setOnClickListener(new View.OnClickListener() {
             //private Object onMenuItemClickListener;
             @Override
@@ -107,6 +107,8 @@ public class GalleryFragment extends Fragment implements PopupMenu.OnMenuItemCli
         return root;
     }
 
+
+//menú popup en posible versión futura
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item1:
