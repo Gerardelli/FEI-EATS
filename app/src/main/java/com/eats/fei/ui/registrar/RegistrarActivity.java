@@ -36,6 +36,8 @@ public class RegistrarActivity extends AppCompatActivity {
     private String correo = "";
     private String contrasena = "";
     private String nombre ="";
+    private static String urlFoto ="https://firebasestorage.googleapis.com/v0/b/fei-uv.appspot.com/o/fotosPerfil%2Fuser.png?alt=media&token=a367e233-200d-407f-a693-fb30c4de3b81";
+
 
     //VARIABLES DE FIREBASE
     FirebaseAuth mAuth; //AUTENTICACIÓN
@@ -102,6 +104,7 @@ public class RegistrarActivity extends AppCompatActivity {
                     map.put("Correo", correo);
                     map.put("Contrasena", contrasena);
                     map.put("Nombre", nombre);
+                    map.put("fotoPerfilURL",urlFoto);
 
                     String id = mAuth.getCurrentUser().getUid();
                     mDatabase.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
