@@ -165,22 +165,32 @@ public class EditarFoto extends AppCompatActivity {
                 Uri uri= data.getData ();
                 StorageReference filePath = dStorage.child ("fotosPerfil").child (uri.getLastPathSegment ());
 
-                filePath.putFile (uri).addOnSuccessListener (new OnSuccessListener<UploadTask.TaskSnapshot> ( ) {
+                filePath.putFile (uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        dProgressDialog.dismiss ();
-                        // descargarfoto guarda la url de la foto que se acaba de subir
-                        descargarfoto = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
-                        //cambia la url de la foto de perfil por la que tiene la variable descargafoto
-                        Map<String, Object> map = new HashMap<>();
-                        map.put("fotoPerfilURL", descargarfoto);
+                        if (taskSnapshot.getMetadata() != null) {
+                            if (taskSnapshot.getMetadata().getReference() != null) {
+                                Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                                result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        dProgressDialog.dismiss ();
+                                        String imageUrl = uri.toString();
 
-                        FirebaseUser user = firebaseAuth.getInstance ().getCurrentUser();
-                        dDatabase.getReference ().child("Usuarios").child(user.getUid()).updateChildren(map);
+                                        Map<String, Object> map = new HashMap<>();
+                                        map.put("fotoPerfilURL", imageUrl);
 
-                        Toast.makeText (EditarFoto.this, "Foto Subida", Toast.LENGTH_SHORT).show ( );
-                    }
-                });
+                                        FirebaseUser user = firebaseAuth.getInstance ().getCurrentUser();
+                                        dDatabase.getReference ().child("Usuarios").child(user.getUid()).updateChildren(map);
+
+                                        Toast.makeText (EditarFoto.this, "Foto Subida", Toast.LENGTH_SHORT).show ( );
+                                        //createNewPost(imageUrl);
+                                    }
+                                });
+                            }
+                        }
+                    }});
+
             }
         }
 }
