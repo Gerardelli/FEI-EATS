@@ -65,4 +65,7 @@
     <string name="categor_a">Categoría</string>
     <string name="editar_foto">Editar foto</string>
     <string name="hola">Hola</string>
+    <string name="de_galer_a">De galería</string>
+    <string name="tomar_foto">Tomar foto</string>
+    <string name="eliminar">Eliminar</string>
 </resources>
