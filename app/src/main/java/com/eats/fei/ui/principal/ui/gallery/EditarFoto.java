@@ -189,4 +189,9 @@ public class EditarFoto extends AppCompatActivity {
 
             }
         }
+
+                                        //Método para subir la foto con la cámara
+    /*-----------------------------------------------------------------------------------------------------------------------------*/
+
+
 }
