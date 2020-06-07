@@ -1,6 +1,5 @@
 package com.eats.fei.ui.principal.ui.slideshow;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -16,21 +15,19 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.eats.fei.R;
+import com.eats.fei.ui.principal.PrincipalActivity;
+import com.eats.fei.ui.registrar.EditarActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -102,8 +99,9 @@ public class RegistrarProductoActivity extends AppCompatActivity {
 
                 }else {
                     guardarProducto();
-                    limpiarDatos();
                     Toast.makeText(RegistrarProductoActivity.this, "Producto Registrado", Toast.LENGTH_LONG).show();
+                    limpiarDatos();
+                    startActivity( new Intent(RegistrarProductoActivity.this, SlideshowFragment.class));
                 }
 
             }
@@ -145,7 +143,7 @@ public class RegistrarProductoActivity extends AppCompatActivity {
                                             .centerCrop()
                                             //Asigna el valor de lo que tiene la URL al imageView correspondiente
                                             .into (fotoP);
-                                    Toast.makeText (RegistrarProductoActivity.this, "Foto Subida", Toast.LENGTH_SHORT).show ( );
+                                    Toast.makeText (RegistrarProductoActivity.this, "Foto de Subida con éxito", Toast.LENGTH_SHORT).show ( );
 
                                 }
                             });
@@ -207,7 +205,6 @@ public class RegistrarProductoActivity extends AppCompatActivity {
         map.put("descripcion", descripcionP);
         map.put("Categoria", categoriaP);
         map.put("fotoProductoURL", fotou);
-
 
         dReference.child("Productos").child(id_producto).setValue(map);
     }
