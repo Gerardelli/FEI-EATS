@@ -6,8 +6,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,12 +42,13 @@ import java.util.Map;
 public class EditarFoto extends AppCompatActivity {
 
     private final int GALLERY_INTENT = 1;
+    private final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView foto;
     private Button btn20;
     private Button btn22;
+    private Button btn21;
     private StorageReference dStorage;
     private ProgressDialog dProgressDialog;
-    private String descargarfoto;
     private FirebaseDatabase dDatabase;
     private FirebaseAuth firebaseAuth = null;
     private static String urlFoto ="https://firebasestorage.googleapis.com/v0/b/fei-uv.appspot.com/o/fotosPerfil%2Fuser.png?alt=media&token=a367e233-200d-407f-a693-fb30c4de3b81";
@@ -56,6 +59,7 @@ public class EditarFoto extends AppCompatActivity {
         setContentView (R.layout.activity_editar_foto);
         dStorage = FirebaseStorage .getInstance().getReference();
         btn20 =(Button) findViewById (R.id.button20);
+        btn21 =(Button) findViewById (R.id.button21);
         btn22 =(Button) findViewById (R.id.button22);
         dProgressDialog = new ProgressDialog (this);
         foto = findViewById (R.id.imageView20);
@@ -122,6 +126,16 @@ public class EditarFoto extends AppCompatActivity {
             }
         });
 
+
+        btn21.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+        });
+
                                         /*MÉTODO PARA MOSTRAR LA FOTO DE PERFIL*/
     /*-----------------------------------------------------------------------------------------------------------------------------*/
         dDatabase = FirebaseDatabase.getInstance();
@@ -148,50 +162,90 @@ public class EditarFoto extends AppCompatActivity {
                                               //Método para subir la foto
     /*-----------------------------------------------------------------------------------------------------------------------------*/
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-            super.onActivityResult (requestCode,resultCode,data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult (requestCode, resultCode, data);
 
-            if(requestCode==GALLERY_INTENT && resultCode==RESULT_OK){
-                //ProgressDialog muestra que se está subiendo la imágen
-                dProgressDialog.setTitle ("Subiendo foto...");
-                dProgressDialog.setMessage ("Subiendo foto, espera");
-                dProgressDialog.setCancelable (false);
-                dProgressDialog.show();
+        if (requestCode == GALLERY_INTENT && resultCode == RESULT_OK) {
+            //ProgressDialog muestra que se está subiendo la imágen
+            dProgressDialog.setTitle ("Subiendo foto...");
+            dProgressDialog.setMessage ("Subiendo foto, espera");
+            dProgressDialog.setCancelable (false);
+            dProgressDialog.show ( );
 
-                Uri uri= data.getData ();
-                StorageReference filePath = dStorage.child ("fotosPerfil").child (uri.getLastPathSegment ());
+            Uri uri = data.getData ( );
+            StorageReference filePath = dStorage.child ("fotosPerfil").child (uri.getLastPathSegment ( ));
 
-                filePath.putFile (uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        if (taskSnapshot.getMetadata() != null) {
-                            if (taskSnapshot.getMetadata().getReference() != null) {
-                                Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
-                                result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        dProgressDialog.dismiss ();
-                                        String imageUrl = uri.toString();
+            filePath.putFile (uri).addOnSuccessListener (new OnSuccessListener<UploadTask.TaskSnapshot> ( ) {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    if (taskSnapshot.getMetadata ( ) != null) {
+                        if (taskSnapshot.getMetadata ( ).getReference ( ) != null) {
+                            Task<Uri> result = taskSnapshot.getStorage ( ).getDownloadUrl ( );
+                            result.addOnSuccessListener (new OnSuccessListener<Uri> ( ) {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    dProgressDialog.dismiss ( );
+                                    String imageUrl = uri.toString ( );
 
-                                        Map<String, Object> map = new HashMap<>();
-                                        map.put("fotoPerfilURL", imageUrl);
+                                    Map<String, Object> map = new HashMap<> ( );
+                                    map.put ("fotoPerfilURL", imageUrl);
 
-                                        FirebaseUser user = firebaseAuth.getInstance ().getCurrentUser();
-                                        dDatabase.getReference ().child("Usuarios").child(user.getUid()).updateChildren(map);
+                                    FirebaseUser user = firebaseAuth.getInstance ( ).getCurrentUser ( );
+                                    dDatabase.getReference ( ).child ("Usuarios").child (user.getUid ( )).updateChildren (map);
 
-                                        Toast.makeText (EditarFoto.this, "Foto Subida", Toast.LENGTH_SHORT).show ( );
+                                    Toast.makeText (EditarFoto.this, "Foto Subida", Toast.LENGTH_SHORT).show ( );
 
-                                    }
-                                });
-                            }
+                                }
+                            });
                         }
-                    }});
+                    }
+                }
+            });
 
-            }
+        }
+                                                    //Método para subir la foto con la cámara
+        /*-----------------------------------------------------------------------------------------------------------------------------*/
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            //ProgressDialog muestra que se está subiendo la imágen
+            dProgressDialog.setTitle ("Subiendo foto...");
+            dProgressDialog.setMessage ("Subiendo foto, espera");
+            dProgressDialog.setCancelable (false);
+            dProgressDialog.show ( );
+
+            Uri uri = data.getData ( );
+            //String timeStamp = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss").format(new Date());
+            StorageReference filePath = dStorage.child ("fotosPerfil").child (uri.getLastPathSegment ( ));
+
+            filePath.putFile (uri).addOnSuccessListener (new OnSuccessListener<UploadTask.TaskSnapshot> ( ) {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    if (taskSnapshot.getMetadata ( ) != null) {
+                        if (taskSnapshot.getMetadata ( ).getReference ( ) != null) {
+                            Task<Uri> result = taskSnapshot.getStorage ( ).getDownloadUrl ( );
+                            result.addOnSuccessListener (new OnSuccessListener<Uri> ( ) {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    dProgressDialog.dismiss ( );
+                                    String imageUrl = uri.toString ( );
+
+                                    Map<String, Object> map = new HashMap<> ( );
+                                    map.put ("fotoPerfilURL", imageUrl);
+
+                                    FirebaseUser user = firebaseAuth.getInstance ( ).getCurrentUser ( );
+                                    dDatabase.getReference ( ).child ("Usuarios").child (user.getUid ( )).updateChildren (map);
+
+                                    Toast.makeText (EditarFoto.this, "Foto Subida", Toast.LENGTH_SHORT).show ( );
+
+                                }
+                            });
+                        }
+                    }
+                }
+            });
         }
 
-                                        //Método para subir la foto con la cámara
-    /*-----------------------------------------------------------------------------------------------------------------------------*/
+    }
 
 
 }
