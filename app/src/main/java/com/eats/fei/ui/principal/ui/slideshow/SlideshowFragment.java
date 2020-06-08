@@ -42,7 +42,29 @@ public class SlideshowFragment extends Fragment {
 
 
 
-
+        //---Boton Editar producto-------------------------------------
+        //final Button btnEditar = root.findViewById(R.id.bntEditar);
+        //Actividad para registrar producto
+        /*btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SlideshowFragment.this.getContext(), EditarProductoActivity.class));
+            }
+        });
+        return root;
+        */
+        //----Boton Eliminar producto---------------------------
+        //final Button btnEditar = root.findViewById(R.id.bntEditar);
+        //Actividad para registrar producto
+        /*btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SlideshowFragment.this.getContext(), EliminarProductoActivity.class));
+            }
+        });
+        return root;
+        */
+        //--------------------------------
         //Boton agregar producto
         final Button registarP = root.findViewById(R.id.button3);
         //Actividad para registrar producto
