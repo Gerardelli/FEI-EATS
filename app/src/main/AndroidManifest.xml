@@ -23,6 +23,7 @@
         <activity android:name=".ui.registrar.RegistrarActivity" />
         <activity android:name=".ui.registrar.RegistrarProductoActivity" />
         <activity android:name=".ui.registrar.EditarActivity" />
+
         <activity
 
             android:name=".ui.login.LoginActivity"

@@ -70,4 +70,7 @@
     <string name="eliminar">Eliminar</string>
     <string name="de_la_c_mara">De la cámara</string>
     <string name="foto_de_producto">FOTO DE PRODUCTO</string>
+
+    <string name="Editar">Editar</string>
+    <string name="Eliminar">Eliminar</string>
 </resources>
