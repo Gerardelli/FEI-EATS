@@ -34,7 +34,7 @@ public class RecyclerViewAdaptador extends RecyclerView.Adapter<RecyclerViewAdap
     }
 
     private List<ProductoModelo> productoLista;
-
+//Se cambiò el modo de paso de paràmetros, de pùblico a privado
     RecyclerViewAdaptador(List<ProductoModelo> productoLista) {
         this.productoLista = productoLista;
     }
