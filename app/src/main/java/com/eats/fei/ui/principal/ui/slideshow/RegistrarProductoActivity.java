@@ -48,6 +48,8 @@ public class RegistrarProductoActivity extends AppCompatActivity {
     private String descripcionP = "";
     private String categoriaP ="";
     private String id_usaurio="";
+    String fotou;
+
 
 
     //VARIABLES DE FIREBASE
@@ -57,12 +59,8 @@ public class RegistrarProductoActivity extends AppCompatActivity {
     private StorageReference dStorage;
 
     private FirebaseUser user;
-    String fotou;
 
-    //private ProgressDialog dProgressDialog;
-    //private FirebaseDatabase dDatabase;
     private FirebaseAuth firebaseAuth = null;
-    private ProgressDialog dProgressDialog;
 
 
     @Override
@@ -99,9 +97,8 @@ public class RegistrarProductoActivity extends AppCompatActivity {
 
                 }else {
                     guardarProducto();
-                    Toast.makeText(RegistrarProductoActivity.this, "Producto Registrado", Toast.LENGTH_LONG).show();
                     limpiarDatos();
-                    startActivity( new Intent(RegistrarProductoActivity.this, SlideshowFragment.class));
+                    Toast.makeText(RegistrarProductoActivity.this, "Producto Registrado", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -213,6 +210,8 @@ public class RegistrarProductoActivity extends AppCompatActivity {
         nombreProducto.setText("");
         precioProducto.setText("");
         descripcionProducto.setText("");
+        fotoP.setImageResource(R.drawable.dulce);
+        fotou = "";
     }
 
     public void validarDatos(){
