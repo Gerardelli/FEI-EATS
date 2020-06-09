@@ -1,5 +1,7 @@
 package com.eats.fei.ui.principal.ui.slideshow;
 
+import android.net.Uri;
+
 public class ProductoModelo {
 
     private String nombre, precio, descripcion;
@@ -13,6 +15,12 @@ public class ProductoModelo {
         this.precio = precio;
         this.descripcion = descripcion;
         this.imgProducto = imgProducto;
+    }
+
+    public ProductoModelo(String nombre, String precio, String descripcion, Uri photoUrl) {
+    }
+
+    public ProductoModelo(String nombre, String precio, String descripcion) {
     }
 
     public String getNombre() {
@@ -46,4 +54,6 @@ public class ProductoModelo {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+
 }

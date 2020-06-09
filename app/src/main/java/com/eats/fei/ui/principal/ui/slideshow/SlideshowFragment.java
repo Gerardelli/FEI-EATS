@@ -1,11 +1,13 @@
 package com.eats.fei.ui.principal.ui.slideshow;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,13 +18,34 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.eats.fei.R;
+import com.eats.fei.ui.principal.ui.gallery.EditarFoto;
+import com.eats.fei.ui.principal.ui.gallery.GalleryFragment;
+import com.eats.fei.ui.principal.ui.gallery.GalleryViewModel;
+import com.eats.fei.ui.registrar.EditarActivity;
 import com.eats.fei.ui.registrar.RegistrarActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SlideshowFragment extends Fragment {
+
+    //Apartado para mostrar datos y conexion a base de datos
+    private final int GALLERY_INTENT = 1;
+    private FirebaseDatabase dDatabase;
+    private FirebaseAuth firebaseAuth = null;
+    private GalleryViewModel galleryViewModel;
+    private DatabaseReference mDatabase;
+
+
 
     private RecyclerView recyclerViewProducto;
     private RecyclerViewAdaptador adaptadorProducto;
@@ -34,38 +57,38 @@ public class SlideshowFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
 
         //Rellenar productos
-        recyclerViewProducto = (RecyclerView)root.findViewById(R.id.recyclerProducto);
+        recyclerViewProducto = root.findViewById(R.id.recyclerProducto);
         recyclerViewProducto.setLayoutManager(new LinearLayoutManager(SlideshowFragment.this.getContext()));
 
         adaptadorProducto = new RecyclerViewAdaptador(obtenerProducto());
         recyclerViewProducto.setAdapter(adaptadorProducto);
 
+        //Datos a setear
+        final TextView nombre = root.findViewById (R.id.txtNombre);
+        final TextView precio = root.findViewById (R.id.txtPrecio);
+        final TextView descripcion = root.findViewById (R.id.txtDescripcion);
+        final Button btnEditar =  root.findViewById(R.id.bntEditar);
+        final Button btnEliminar =  root.findViewById(R.id.btnEliminar);
+        final ImageView imagen1 = root.findViewById (R.id.imgProducto);
 
-
-        //---Boton Editar producto-------------------------------------
-        //final Button btnEditar = root.findViewById(R.id.bntEditar);
-        //Actividad para registrar producto
+        /*Apartado para boton   ---------------Está por agregarse*/
         /*btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SlideshowFragment.this.getContext(), EditarProductoActivity.class));
+                startActivity(new Intent(SlideshowFragment.this.getContext(), EditarActivity.class));
             }
         });
-        return root;
-        */
-        //----Boton Eliminar producto---------------------------
-        //final Button btnEditar = root.findViewById(R.id.bntEditar);
-        //Actividad para registrar producto
-        /*btnEditar.setOnClickListener(new View.OnClickListener() {
+
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SlideshowFragment.this.getContext(), EliminarProductoActivity.class));
+                startActivity(new Intent(SlideshowFragment.this.getContext(), EliminarActivity.class));
             }
         });
-        return root;
-        */
-        //--------------------------------
-        //Boton agregar producto
+
+         */
+
+        /*Boton agregar producto-------------------------------------*/
         final Button registarP = root.findViewById(R.id.button3);
         //Actividad para registrar producto
         registarP.setOnClickListener(new View.OnClickListener() {
@@ -74,16 +97,66 @@ public class SlideshowFragment extends Fragment {
                 startActivity(new Intent(SlideshowFragment.this.getContext(), RegistrarProductoActivity.class));
             }
         });
+
+
+        /*Final del Apartado para los botones -----------------------*/
+        //Base de datos ------------------------------
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth mAuth; //AUTENTICACIÓN
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("Productos");
+
+        dDatabase = FirebaseDatabase.getInstance();
+        FirebaseUser ref1 = FirebaseAuth.getInstance().getCurrentUser();
+        obtenerProducto();
+
+
+
+
+
         return root;
     }
 
-    public List<ProductoModelo> obtenerProducto(){
-        List<ProductoModelo> producto = new ArrayList<>();
+    private List<ProductoModelo> obtenerProducto(){
+        final List<ProductoModelo> producto = new ArrayList<>();
+        /*
+        mDatabase.child("Productos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+
+                    for(DataSnapshot ds: dataSnapshot.getChildren()){
+                        String nombre = ds.child("Nombre Producto").getValue().toString();
+                        String precio = ds.child("Precio Producto").getValue().toString();
+                        String descripcion = ds.child("descripcion").getValue().toString();
+                        //Uri photoUrl = Uri.parse (dataSnapshot.child ("fotoProductoURL").getValue().toString ());
+
+                        producto.add(new ProductoModelo(nombre,precio,descripcion));
+
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
+
+
+
         producto.add(new ProductoModelo("Dulce 1","$10.00","Dulce muy rico",R.drawable.dulce));
         producto.add(new ProductoModelo("Dulce 2","$5.00","Dulce muy rico",R.drawable.dulce));
         producto.add(new ProductoModelo("Dulce 3","$7.00","Dulce muy rico",R.drawable.dulce));
         producto.add(new ProductoModelo("Dulce 4","$9.00","Dulce muy rico",R.drawable.dulce));
 
+
+
+
         return producto;
     }
+
+
 }
