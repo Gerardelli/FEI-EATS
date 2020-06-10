@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eats.fei.R;
+import com.eats.fei.ui.registrar.Producto;
 
 import java.util.List;
 
@@ -48,11 +49,19 @@ public class RecyclerViewAdaptador extends RecyclerView.Adapter<RecyclerViewAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtNombre.setText(productoLista.get(position).getNombre());
+        /*holder.txtNombre.setText(productoLista.get(position).getNombre());
         holder.txtPrecio.setText(productoLista.get(position).getPrecio());
         holder.txtDescripcion.setText(productoLista.get(position).getDescripcion());
 
         holder.fotoProducto.setImageResource(productoLista.get(position).getImgProducto());
+
+
+         */
+
+        ProductoModelo producto = productoLista.get(position);
+        holder.txtNombre.setText(producto.getNombre());
+        holder.txtPrecio.setText(producto.getPrecio());
+        holder.txtDescripcion.setText(producto.getDescripcion());
     }
 
     @Override
