@@ -1,7 +1,6 @@
 package com.eats.fei.ui.principal.ui.slideshow;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,20 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.eats.fei.R;
-import com.eats.fei.ui.principal.ui.gallery.EditarFoto;
-import com.eats.fei.ui.principal.ui.gallery.GalleryFragment;
 import com.eats.fei.ui.principal.ui.gallery.GalleryViewModel;
-import com.eats.fei.ui.registrar.EditarActivity;
-import com.eats.fei.ui.registrar.RegistrarActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,10 +32,11 @@ public class SlideshowFragment extends Fragment {
 
     //Apartado para mostrar datos y conexion a base de datos
     private final int GALLERY_INTENT = 1;
-    private FirebaseDatabase dDatabase;
-    private FirebaseAuth firebaseAuth = null;
+    private DatabaseReference dDatabase;
+    //private FirebaseAuth firebaseAuth = null;
     private GalleryViewModel galleryViewModel;
     private DatabaseReference mDatabase;
+
 
 
 
@@ -101,12 +94,11 @@ public class SlideshowFragment extends Fragment {
 
         /*Final del Apartado para los botones -----------------------*/
         //Base de datos ------------------------------
-        mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth; //AUTENTICACIÓN
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("Productos");
 
-        dDatabase = FirebaseDatabase.getInstance();
+       // dDatabase = FirebaseDatabase.getInstance();
         FirebaseUser ref1 = FirebaseAuth.getInstance().getCurrentUser();
         obtenerProducto();
 
@@ -119,22 +111,33 @@ public class SlideshowFragment extends Fragment {
 
     private List<ProductoModelo> obtenerProducto(){
         final List<ProductoModelo> producto = new ArrayList<>();
-        /*
-        mDatabase.child("Productos").addValueEventListener(new ValueEventListener() {
+        //dDatabase = FirebaseDatabase.getInstance();
+        //final FirebaseUser user = firebaseAuth.getInstance ().getCurrentUser();
+        //String id_producto = UUID.randomUUID().toString();/*.child(id_producto)*/
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        dDatabase = FirebaseDatabase.getInstance().getReference("Productos");
+        dDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                producto.add(new ProductoModelo("Dulce 1","$10.00","Dulce muy rico",R.drawable.dulce));
+
                 if (dataSnapshot.exists()){
 
-                    for(DataSnapshot ds: dataSnapshot.getChildren()){
-                        String nombre = ds.child("Nombre Producto").getValue().toString();
-                        String precio = ds.child("Precio Producto").getValue().toString();
-                        String descripcion = ds.child("descripcion").getValue().toString();
-                        //Uri photoUrl = Uri.parse (dataSnapshot.child ("fotoProductoURL").getValue().toString ());
+                    //producto.clear();
+                        for(DataSnapshot ds: dataSnapshot.getChildren()){
+                            //if(dDatabase.getReference("Productos").child("ID_usuario") == mDatabase.child("Usuarios").child(user.getUid())) {
+                              //  String nombre = ds.child("Nombre Producto").getValue().toString();
+                                //String precio = ds.child("Precio Producto").getValue().toString();
+                                //String descripcion = ds.child("descripcion").getValue().toString();
+                                //Uri photoUrl = Uri.parse(dataSnapshot.child("fotoProductoURL").getValue().toString());
 
-                        producto.add(new ProductoModelo(nombre,precio,descripcion));
+                                //producto.add(new ProductoModelo(nombre, precio, descripcion,R.drawable.dulce));
+                           // }
+
+                        }
 
 
-                    }
+
 
                 }
             }
@@ -143,14 +146,14 @@ public class SlideshowFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
 
 
-        producto.add(new ProductoModelo("Dulce 1","$10.00","Dulce muy rico",R.drawable.dulce));
-        producto.add(new ProductoModelo("Dulce 2","$5.00","Dulce muy rico",R.drawable.dulce));
-        producto.add(new ProductoModelo("Dulce 3","$7.00","Dulce muy rico",R.drawable.dulce));
-        producto.add(new ProductoModelo("Dulce 4","$9.00","Dulce muy rico",R.drawable.dulce));
+        //producto.add(new ProductoModelo("Dulce 1","$10.00","Dulce muy rico",R.drawable.dulce));
+        //producto.add(new ProductoModelo("Dulce 2","$5.00","Dulce muy rico",R.drawable.dulce));
+        //producto.add(new ProductoModelo("Dulce 3","$7.00","Dulce muy rico",R.drawable.dulce));
+        //producto.add(new ProductoModelo("Dulce 4","$9.00","Dulce muy rico",R.drawable.dulce));
 
 
 

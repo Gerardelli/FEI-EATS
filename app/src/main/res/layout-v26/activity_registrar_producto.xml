@@ -16,12 +16,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.107" />
+        app:layout_constraintVertical_bias="0.028" />
 
     <EditText
         android:id="@+id/nombreProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/nombre_del_producto"
         android:inputType="textPersonName"
@@ -29,13 +30,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.193"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.313" />
 
     <EditText
         android:id="@+id/precioProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/precio_del_producto"
         android:inputType="textPersonName"
@@ -43,13 +44,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.291"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.412" />
 
     <EditText
         android:id="@+id/descripcionProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/descripci_n_del_producto"
         android:inputType="textPersonName"
@@ -57,8 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.517" />
 
     <Button
         android:id="@+id/registrarProducto"
@@ -99,29 +99,27 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="95dp"
-        android:layout_height="31dp"
+        android:layout_width="159dp"
+        android:layout_height="20dp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/btn_amarillo"
         android:text="@string/foto_de_producto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.31"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.477" />
+        app:layout_constraintVertical_bias="0.246" />
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="107dp"
         android:layout_height="74dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.674"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.516"
-        app:srcCompat="@drawable/dulce"
-        android:contentDescription="TODO" />
+        app:layout_constraintVertical_bias="0.113"
+        app:srcCompat="@drawable/dulce" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
