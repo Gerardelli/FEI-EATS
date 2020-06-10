@@ -50,8 +50,6 @@ public class RegistrarProductoActivity extends AppCompatActivity {
     private String id_usaurio="";
     String fotou;
 
-
-
     //VARIABLES DE FIREBASE
     private FirebaseDatabase dDatabase;
     private DatabaseReference dReference;
@@ -112,8 +110,6 @@ public class RegistrarProductoActivity extends AppCompatActivity {
                 startActivityForResult (intent,GALLERY_INTENT);
             }
         });
-
-
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -150,46 +146,6 @@ public class RegistrarProductoActivity extends AppCompatActivity {
             });
 
         }
-
-
-        /*if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            //ProgressDialog muestra que se está subiendo la imágen
-            dProgressDialog.setTitle ("Subiendo foto...");
-            dProgressDialog.setMessage ("Subiendo foto, espera");
-            dProgressDialog.setCancelable (false);
-            dProgressDialog.show ( );
-
-            Uri uri = data.getData ( );
-            String timeStamp = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss").format(new Date());
-            StorageReference filePath = dStorage.child ("fotoProductoURL/"+timeStamp+".jpg").child (uri.getLastPathSegment ( ));
-
-            filePath.putFile (uri).addOnSuccessListener (new OnSuccessListener<UploadTask.TaskSnapshot> ( ) {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    if (taskSnapshot.getMetadata ( ) != null) {
-                        if (taskSnapshot.getMetadata ( ).getReference ( ) != null) {
-                            Task<Uri> result = taskSnapshot.getStorage ( ).getDownloadUrl ( );
-                            result.addOnSuccessListener (new OnSuccessListener<Uri> ( ) {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    dProgressDialog.dismiss ( );
-                                    String imageUrl = uri.toString ( );
-
-                                    Map<String, Object> map = new HashMap<> ( );
-                                    map.put ("fotoProductoURL", imageUrl);
-
-                                    FirebaseUser user = firebaseAuth.getInstance ( ).getCurrentUser ( );
-                                    dDatabase.getReference ( ).child ("Usuarios").child (user.getUid ( )).updateChildren (map);
-
-                                    Toast.makeText (RegistrarProductoActivity.this, "Foto Subida", Toast.LENGTH_SHORT).show ( );
-
-                                }
-                            });
-                        }
-                    }
-                }
-            });
-        }*/
 
     }
 

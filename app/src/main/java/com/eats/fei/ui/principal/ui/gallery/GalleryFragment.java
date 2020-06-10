@@ -1,9 +1,9 @@
 package com.eats.fei.ui.principal.ui.gallery;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,14 +20,18 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
 import com.eats.fei.R;
+import com.eats.fei.ui.login.LoginActivity;
 import com.eats.fei.ui.registrar.EditarActivity;
-import com.eats.fei.ui.registrar.RegistrarActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import static android.content.ContentValues.TAG;
 
 
 public class GalleryFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
@@ -46,6 +50,7 @@ public class GalleryFragment extends Fragment implements PopupMenu.OnMenuItemCli
         final Button button2 =  root.findViewById(R.id.button2);
         final Button button3 =  root.findViewById(R.id.button3);
         final ImageView image4 = root.findViewById (R.id.imageView4);
+        final Button eliminarUsuario = root.findViewById(R.id.btnEliminar);
 
        /*Apartado para boton*/
         button2.setOnClickListener(new View.OnClickListener() {
@@ -61,22 +66,13 @@ public class GalleryFragment extends Fragment implements PopupMenu.OnMenuItemCli
                 startActivity(new Intent(GalleryFragment.this.getContext(), EditarFoto.class));
             }
         });
-//Boton para sacar menú popup en posible versión futura
-        /*button3.setOnClickListener(new View.OnClickListener() {
-            //private Object onMenuItemClickListener;
-            @Override
-            public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), v);
-                //popup.setOnMenuItemClickListener();
-                popup.inflate(R.menu.popup_menu);
-                popup.show();
-            }
-        });*/
-        /*Fin del apartado*/
+
 
         dDatabase = FirebaseDatabase.getInstance();
-        FirebaseUser user = firebaseAuth.getInstance ().getCurrentUser();
+        final FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
+
         //Obtiene el id del usuario
+
         dDatabase.getReference ("Usuarios").child(user.getUid()).addValueEventListener(new ValueEventListener () {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -105,6 +101,22 @@ public class GalleryFragment extends Fragment implements PopupMenu.OnMenuItemCli
             }
         });
         return root;
+    }
+
+    public void deleteUser(View view) {
+        // [START delete_user]
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User account deleted.");
+                        }
+                    }
+                });
+        // [END delete_user]
     }
 
 
