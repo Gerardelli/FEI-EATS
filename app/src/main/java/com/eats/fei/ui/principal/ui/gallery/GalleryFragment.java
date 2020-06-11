@@ -1,5 +1,7 @@
 package com.eats.fei.ui.principal.ui.gallery;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,6 +26,8 @@ import com.eats.fei.ui.login.LoginActivity;
 import com.eats.fei.ui.registrar.EditarActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +43,7 @@ public class GalleryFragment extends Fragment implements PopupMenu.OnMenuItemCli
     private FirebaseDatabase dDatabase;
     private FirebaseAuth firebaseAuth = null;
     private GalleryViewModel galleryViewModel;
+    private FirebaseAuth mAuth;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel = ViewModelProviders.of(this).get(GalleryViewModel.class);
@@ -64,6 +69,13 @@ public class GalleryFragment extends Fragment implements PopupMenu.OnMenuItemCli
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(GalleryFragment.this.getContext(), EditarFoto.class));
+            }
+        });
+
+        eliminarUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteUser();
             }
         });
 
@@ -103,20 +115,52 @@ public class GalleryFragment extends Fragment implements PopupMenu.OnMenuItemCli
         return root;
     }
 
-    public void deleteUser(View view) {
-        // [START delete_user]
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        user.delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "User account deleted.");
-                        }
+
+    public void deleteUser() {
+        mAuth = FirebaseAuth.getInstance();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+
+        // Configura el titulo.
+        alertDialogBuilder.setTitle("¿Deseas eliminar tu perfil?");
+
+        // Configura el mensaje.
+        alertDialogBuilder
+                .setMessage("Al dar click en si, ya no tendrás acceso a tu cuenta y perderas todos tus productos ")
+                .setCancelable(false)
+                .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        //Si la respuesta es afirmativa se procede a eliminar la autenticación
+                        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                        // Obtiene credenciales de autenticación del usuario para volver a autenticarse.
+                        AuthCredential credential = EmailAuthProvider.getCredential("user@example.com", "password1234");
+
+                        user.reauthenticate(credential)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        user.delete()
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Log.d(TAG, "User account deleted.");
+                                                            mAuth.signOut();
+                                                            startActivity(new Intent(GalleryFragment.this.getContext(), LoginActivity.class));
+                                                        }
+                                                    }
+                                                });
+
+                                    }
+                                });
                     }
-                });
-        // [END delete_user]
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                }).create().show();
     }
 
 
