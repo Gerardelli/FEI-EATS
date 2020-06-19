@@ -6,10 +6,8 @@
     android:background="#DEFBFF"
     tools:context=".ui.principal.ui.home.Fragments.Comida">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/listComida"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="COMIDA" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

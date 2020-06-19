@@ -6,10 +6,8 @@
     android:background="#DEFBFF"
     tools:context=".ui.principal.ui.home.Fragments.Frituras">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/listFrituras"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="FRITURAS" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

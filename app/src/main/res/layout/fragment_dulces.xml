@@ -6,10 +6,8 @@
     android:background="#DEFBFF"
     tools:context=".ui.principal.ui.home.Fragments.Dulces">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/listDulces"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="DULCES" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>
