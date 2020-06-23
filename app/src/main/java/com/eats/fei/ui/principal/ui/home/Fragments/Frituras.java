@@ -97,7 +97,7 @@ public class Frituras extends Fragment {
                     mRecyclerView.setAdapter(mAdapter);
                 }
             }
-
+//---
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
