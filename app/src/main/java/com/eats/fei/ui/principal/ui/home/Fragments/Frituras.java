@@ -78,7 +78,8 @@ public class Frituras extends Fragment {
     }
 
     private void getMensajesFromFirebase(){
-        ddulces.child("Productos").addValueEventListener(new ValueEventListener() {
+        Query query = ddulces.child("Productos").orderByChild("Categoria").equalTo("Frituras");
+        query.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {

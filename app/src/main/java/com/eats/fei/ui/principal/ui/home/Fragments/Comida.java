@@ -74,7 +74,8 @@ public class Comida extends Fragment {
     }
 
     private void getMensajesFromFirebase(){
-        ddulces.child("Productos").addValueEventListener(new ValueEventListener() {
+        Query query = ddulces.child("Productos").orderByChild("Categoria").equalTo("Comida");
+        query.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {

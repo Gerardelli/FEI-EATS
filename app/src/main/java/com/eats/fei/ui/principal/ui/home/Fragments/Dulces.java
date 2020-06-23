@@ -59,7 +59,7 @@ public class Dulces extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(Dulces.this.getContext()));
         //Mostrar todos los productos
         ddulces = FirebaseDatabase.getInstance().getReference();
-
+        //Query query = ddulces.child("Productos");
 
 
 
@@ -73,7 +73,8 @@ public class Dulces extends Fragment {
     }
 
     private void getMensajesFromFirebase(){
-        ddulces.child("Productos").addValueEventListener(new ValueEventListener() {
+        Query query = ddulces.child("Productos").orderByChild("Categoria").equalTo("Dulces");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
