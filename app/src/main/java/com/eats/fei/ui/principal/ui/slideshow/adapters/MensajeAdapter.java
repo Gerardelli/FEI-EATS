@@ -46,6 +46,7 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ViewHold
        // Glide.with(viewHolder.view).load("https://console.firebase.google.com/project/fei-uv/storage/fei-uv.appspot.com/files").into(viewHolder.Imagen);
 
     }
+    //----
 
     @Override
     public int getItemCount() {
