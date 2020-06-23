@@ -83,6 +83,8 @@ public class Dulces extends Fragment {
                         String nombre = Objects.requireNonNull(ds.child("Nombre Producto").getValue()).toString();
                         String precio = Objects.requireNonNull(ds.child("Precio Producto").getValue()).toString();
                         String descripcion = Objects.requireNonNull(ds.child("descripcion").getValue()).toString();
+                        //--Aquí va el apartado de la imagen
+
 
                         mMensajesList.add(new Mensaje(nombre, precio,descripcion));
 
