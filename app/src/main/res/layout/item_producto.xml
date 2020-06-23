@@ -20,7 +20,7 @@
             <ImageView
                 android:id="@+id/imgProducto"
                 android:layout_width="297dp"
-                android:layout_height="123dp"
+                android:layout_height="169dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
@@ -47,6 +47,15 @@
 
                 <TextView
                     android:id="@+id/textViewMensaje2"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp" />
+
+                <TextView
+                    android:id="@+id/textViewMensaje3"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginLeft="5dp"

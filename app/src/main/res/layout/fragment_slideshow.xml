@@ -7,19 +7,6 @@
     tools:context=".ui.principal.ui.slideshow.SlideshowFragment"
     android:orientation="horizontal">
 
-    <ListView
-        android:id="@+id/recyclerProducto"
-        android:layout_width="371dp"
-        android:layout_height="514dp"
-        android:layout_below="@+id/button3"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="42dp" />
-
     <Button
         android:id="@+id/button3"
         android:layout_width="match_parent"
@@ -33,5 +20,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.046" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMensajes5"
+        android:layout_width="match_parent"
+        android:layout_height="563dp"
+        android:layout_below="@+id/button3"
+        android:layout_marginTop="4dp" />
 
 </RelativeLayout>
