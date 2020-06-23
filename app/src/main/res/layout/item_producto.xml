@@ -19,8 +19,8 @@
 
             <ImageView
                 android:id="@+id/imgProducto"
-                android:layout_width="281dp"
-                android:layout_height="162dp"
+                android:layout_width="329dp"
+                android:layout_height="169dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
@@ -69,8 +69,8 @@
 
                     <Button
                         android:id="@+id/bntEditar"
-                        android:layout_width="68dp"
-                        android:layout_height="20dp"
+                        android:layout_width="80dp"
+                        android:layout_height="24dp"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
@@ -78,27 +78,27 @@
                         android:layout_marginStart="6dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginEnd="141dp"
+                        android:layout_marginEnd="113dp"
                         android:layout_marginRight="5dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="12dp"
                         android:background="@drawable/btn_verde"
                         android:text="@string/Editar"
                         android:textColor="@color/colorTextIcons" />
 
                     <Button
                         android:id="@+id/btnEliminar"
-                        android:layout_width="88dp"
-                        android:layout_height="19dp"
+                        android:layout_width="84dp"
+                        android:layout_height="24dp"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginStart="77dp"
+                        android:layout_marginStart="98dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginEnd="50dp"
+                        android:layout_marginEnd="17dp"
                         android:layout_marginRight="5dp"
-                        android:layout_marginBottom="17dp"
+                        android:layout_marginBottom="12dp"
                         android:background="@drawable/btn_rojo"
                         android:text="@string/Eliminar"
                         android:textColor="@color/colorTextIcons" />
