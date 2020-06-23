@@ -5,21 +5,27 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.eats.fei.R;
+import com.eats.fei.ui.principal.ui.slideshow.Mensaje;
 import com.eats.fei.ui.principal.ui.slideshow.SlideshowViewModel;
+import com.eats.fei.ui.principal.ui.slideshow.adapters.MensajeAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -28,53 +34,66 @@ import java.util.Objects;
  * A simple {@link Fragment} subclass.
  */
 public class Frituras extends Fragment {
+    //Nueva relacion de seteo
+    //referencia a la base de datos
+    private StorageReference dStorage;
+    private ImageView fotoP;
     private DatabaseReference ddulces;
     private ListView viewlista;
-    private ArrayList<String> listastrings;
+    private MensajeAdapter mAdapter;
     private ArrayAdapter<String> adapter;
+    private ArrayList<Mensaje> mMensajesList = new ArrayList<>();
+    // private ProductoModelo mAdapter;
+    private RecyclerView mRecyclerView;
+    // private ArrayList<ProductoModelo> mMensajesList = new ArrayList<>();
 
-    public Frituras() {
-        // Required empty public constructor
-    }
 
 
     private SlideshowViewModel slideshowViewModel;
+    //
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         slideshowViewModel = ViewModelProviders.of(this).get(SlideshowViewModel.class);
         View root = inflater.inflate(R.layout.fragment_frituras, container, false);
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_todos, container, false);
+      //  mRecyclerView = (RecyclerView) root.findViewById(R.id.recyclerViewMensajes);
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.recyclerViewMensajes4);
 
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(Frituras.this.getContext()));
         //Mostrar todos los productos
         ddulces = FirebaseDatabase.getInstance().getReference();
-        Query query = ddulces.child("Productos");
 
 
-        viewlista = root.findViewById(R.id.listFrituras);
-        listastrings= new ArrayList<>(0);
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        //----------
+        getMensajesFromFirebase();
+        //--------------
+
+        return root;
+
+
+    }
+
+    private void getMensajesFromFirebase(){
+        ddulces.child("Productos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    for (DataSnapshot produ: dataSnapshot.getChildren()){
+                if (dataSnapshot.exists()) {
 
-                        String nombre = Objects.requireNonNull(produ.child("Nombre Producto").getValue()).toString();
-                        String precio = Objects.requireNonNull(produ.child("Precio Producto").getValue()).toString();
-                        //  String descripcion = produ.child("descripcion").getValue().toString();
-                        //String categoria = produ.child("Categoria").getValue().toString();
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        String nombre = Objects.requireNonNull(ds.child("Nombre Producto").getValue()).toString();
+                        String precio = Objects.requireNonNull(ds.child("Precio Producto").getValue()).toString();
+                        String descripcion = Objects.requireNonNull(ds.child("descripcion").getValue()).toString();
 
-                        listastrings.add(System.getProperty ("line.separator")+
-                                "Producto:    "+ nombre + System.getProperty ("line.separator")+
-                                "Precio:     $"+ precio+ System.getProperty ("line.separator"));
-                        //"Descripción: "+ descripcion+ System.getProperty ("line.separator"));
-                        // "Categoria:   "+ categoria+ System.getProperty ("line.separator"));
+                        mMensajesList.add(new Mensaje(nombre, precio,descripcion));
 
-                        adapter = new ArrayAdapter<>(Objects.requireNonNull(Frituras.this.getContext()), android.R.layout.simple_list_item_1, listastrings);
-                        viewlista.setAdapter(adapter);
                     }
+
+                    mAdapter = new MensajeAdapter(mMensajesList, R.layout.item_producto2);
+                    mRecyclerView.setAdapter(mAdapter);
                 }
             }
 
@@ -83,6 +102,5 @@ public class Frituras extends Fragment {
 
             }
         });
-        return root;
     }
 }

@@ -6,8 +6,8 @@
     android:background="#DEFBFF"
     tools:context=".ui.principal.ui.home.Fragments.Comida">
 
-    <ListView
-        android:id="@+id/listComida"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMensajes3"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>
