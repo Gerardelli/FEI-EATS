@@ -37,31 +37,22 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtNombre"
+                    android:id="@+id/textViewMensaje"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="37dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginBottom="5dp" />
 
                 <TextView
-                    android:id="@+id/txtPrecio"
+                    android:id="@+id/textViewMensaje2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginBottom="5dp" />
-
-                <TextView
-                    android:id="@+id/txtDescripcion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="15dp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"

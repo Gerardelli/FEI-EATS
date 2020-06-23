@@ -57,7 +57,7 @@ public class EditarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_edit);
 
-        NombreE = (EditText) findViewById(R.id.txtNombre);
+     //   NombreE = (EditText) findViewById(R.id.txtNombre);
         TelefonoE = (EditText) findViewById(R.id.txtTelefono);
         CorreoE = (EditText) findViewById(R.id.txtCorreo);
         ContrasenaE = (EditText) findViewById(R.id.txtContrasena);
@@ -67,9 +67,10 @@ public class EditarActivity extends AppCompatActivity {
         CorreoE.setEnabled(false);
 
         dDatabase = FirebaseDatabase.getInstance().getReference(); //Aqui obtienes la referencia de la base de datos
-        FirebaseUser user = firebaseAuth.getInstance ().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         //Referencia al nodo              aqui la referencia al usuario
+        assert user != null;
         dDatabase.child("Usuarios").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
